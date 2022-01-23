@@ -1,18 +1,35 @@
-// SO THE CLICK FUNCTION WORKS, BUT ONLY FOR THE FIRST SQUARE.  I CLICK ANYWHERE
-// BUT ONLY THE FIRST SQUARE CHANGES
-
-// maybe try putting clickFunction in the for loop that adds the eventlistners?
-
+let num = 100;
 const grid = document.querySelector('#grid');
-console.log(grid);
 
-for (i = 0; i < 256; i++) {
+function reset() {
+    num = prompt("Enter the grid size:");
+    if (num > 100) {
+        num = prompt("Enter a number below 100:")
+    }
+    const removeSquares = document.querySelectorAll('.square')
+    removeSquares.forEach(square => {square.remove();});
+    for (i = 0; i < num*num; i++) {
+        let square = document.createElement('div');
+        grid.appendChild(square);
+        square.classList.add('square');
+        square.setAttribute('id', 'squareID')
+        square.addEventListener('mouseenter', function() {
+            this.classList.add('square2');
+        })
+    }
+    grid.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+}
+
+
+
+
+for (i = 0; i < num*num; i++) {
     let square = document.createElement('div');
     grid.appendChild(square);
     square.classList.add('square');
     square.setAttribute('id', 'squareID')
-    square.addEventListener('click', function() {
-        this.classList.toggle('square2');
+    square.addEventListener('mouseenter', function() {
+        this.classList.add('square2');
     })
 }
 
